@@ -1,3 +1,6 @@
+
+#!/usr/bin/python
+
 from flask import Flask, render_template, request, redirect, url_for
 import pafy, zipfile, os
 app = Flask(__name__)

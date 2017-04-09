@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Teacher Menu</title>
+    <meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="static/style.css">
+  </head>
+  <body>
+    <form action="http://localhost:5000/result" method="POST"  >
+    <div id=category-d>
+     <p> Category: </p>
+      <input type="text" name="category" placeholder="Math, spelling, writing" required><br>
+    </div>
+    <div id=difficulty-d>
+     <p> Difficulty: </p>
+      <input type="radio" name="difficulty" value="Easy" required>Easy<br>
+      <input type="radio" name="difficulty" value="Medium" required>Medium<br>
+      <input type="radio" name="difficulty" value="Hard" required>Hard<br>
+    </div>
+    <div id=age-d>
+      <p>Age: </p>
+      <input type="radio" name="age" value="Preschool" required>Preschool<br>
+      <input type="radio" name="age" value="Elementary" required>Elementary<br>
+      <input type="radio" name="age" value="Adolescent" required>Adolescent<br>
+      <input type="radio" name="age" value="Adult" required>Adult<br>
+    </div>
+    <div id=keyword-d>
+      <p>Keyword: </p>
+      <input type="text" name="keywords" placeholder="Algebra, U.S. History, Oil Painting" required>
+    </div>
+    <br>
+    <div>
+      <input type="submit" value="Submit" >
+    </div>
+    </form>
+  </body>
+</html>
