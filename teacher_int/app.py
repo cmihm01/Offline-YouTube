@@ -12,6 +12,7 @@ from oauth2client.tools import argparser
 
 app = Flask(__name__)
 
+count = 0
 
 DEVELOPER_KEY = "AIzaSyAt2kWulfcDsdid2AQ2iXh7_aRcNj8ay9g"
 YOUTUBE_API_SERVICE_NAME = "youtube"
@@ -37,7 +38,7 @@ def youtube_search(cat,diff,age,keyw):
 	search_response = youtube.search().list(
 	    q=cat + keyw,
 	    part="id,snippet",
-	    maxResults=25
+	    maxResults=5
 	  ).execute()
 
 	videos = []
@@ -46,8 +47,8 @@ def youtube_search(cat,diff,age,keyw):
 	  # matching videos, channels, and playlists.
 	for search_result in search_response.get("items", []):
 		if search_result["id"]["kind"] == "youtube#video":
-		  videos.append("%s (%s)" % (search_result["snippet"]["title"],
-		                             search_result["id"]["videoId"]))
+		  videos.append(search_result["id"]["videoId"])
+		  #"%s (%s)" % (search_result["snippet"]["title"]
 
 	print "Videos:\n", "\n".join(videos), "\n"
 	return download_vids(videos) 
@@ -60,8 +61,8 @@ def download_vids(vidArray):
     if not os.path.exists("static/vids/"):
         os.makedirs("static/vids/")
     for x in vidArray:
-        url = "https://www.youtube.com/watch?v=" + x
-        video = pafy.new(url)
+        #url = "https://www.youtube.com/watch?v=" + x
+        video = pafy.new(x)
         ##owen's shit
         score = 0
         if (video.viewcount > max_viewcount):
