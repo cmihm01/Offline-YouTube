@@ -3,7 +3,7 @@ from flask import Flask, url_for, request, render_template, redirect
 import os
 import re
 import sys
-import pafy, zipfile, math
+import pafy, zipfile, math, shutil
 
 
 from apiclient.discovery import build
@@ -68,9 +68,8 @@ def download_vids(vidArray):
         if (video.viewcount > max_viewcount):
             max_viewcount = video.viewcount
         score = score + (math.sqrt(video.rating)) + (video.viewcount / max_viewcount) ##+ count
-
-        s = video.allstreams[1]
-        scored_vids.append(tuple((score, s)))
+        best = video.getbest(preftype="mp4")
+        scored_vids.append(tuple((score, best)))
     scored_vids.sort(key = lambda tup: tup[0], reverse=True)
     for i in range(0, len(scored_vids)):
         global count
@@ -93,6 +92,7 @@ def zipdir(path):
     for root, dirs, files in os.walk(path):
         for file in files:
             zf.write(os.path.join(root, file))
+    shutil.rmtree('static/vids')
 
 
 
