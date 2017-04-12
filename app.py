@@ -42,14 +42,17 @@ def youtube_search(cat,diff,age,keyw):
 	  ).execute()
 
 	videos = []
+        videothumbs = []
 
   # Add each result to the appropriate list, and then display the lists of
 	  # matching videos, channels, and playlists.
 	for search_result in search_response.get("items", []):
 		if search_result["id"]["kind"] == "youtube#video":
 		  videos.append(search_result["id"]["videoId"])
+                  videothumbs.append(search_result["snippet"]["thumbnails"]["default"]["url"])
 		  #"%s (%s)" % (search_result["snippet"]["title"]
 
+        print "Videothumbs:\n", "\n".join(videothumbs), "\n"
 	print "Videos:\n", "\n".join(videos), "\n"
 	return download_vids(videos) 
 	# need to be URLS
