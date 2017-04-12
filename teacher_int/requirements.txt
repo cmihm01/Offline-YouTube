@@ -1,3 +1,0 @@
-pafy
-flask
-youtube-dl
