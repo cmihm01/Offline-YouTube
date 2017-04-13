@@ -33,29 +33,29 @@ def result():
       #return render_template("result.html",result = result)
 
 def youtube_search(cat,diff,age,keyw):
-  	youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
+    youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
 
-	search_response = youtube.search().list(
-	    q=cat + keyw,
-	    part="id,snippet",
-	    maxResults=5
-	  ).execute()
+    search_response = youtube.search().list(
+        q=cat + keyw,
+        part="id,snippet",
+        maxResults=5
+      ).execute()
 
-	videos = []
-        videothumbs = []
+    videos = []
+    videothumbs = []
 
   # Add each result to the appropriate list, and then display the lists of
-	  # matching videos, channels, and playlists.
-	for search_result in search_response.get("items", []):
-		if search_result["id"]["kind"] == "youtube#video":
-		  videos.append(search_result["id"]["videoId"])
-                  videothumbs.append(search_result["snippet"]["thumbnails"]["default"]["url"])
-		  #"%s (%s)" % (search_result["snippet"]["title"]
+      # matching videos, channels, and playlists.
+    for search_result in search_response.get("items", []):
+        if search_result["id"]["kind"] == "youtube#video":
+            videos.append(search_result["id"]["videoId"])
+            videothumbs.append(search_result["snippet"]["thumbnails"]["default"]["url"])
+            #"%s (%s)" % (search_result["snippet"]["title"]
 
         print "Videothumbs:\n", "\n".join(videothumbs), "\n"
-	print "Videos:\n", "\n".join(videos), "\n"
-	return download_vids(videos) 
-	# need to be URLS
+    print "Videos:\n", "\n".join(videos), "\n"
+    return download_vids(videos) 
+    # need to be URLS
 
 def download_vids(vidArray):
     max_viewcount = 0
