@@ -26,6 +26,7 @@ def load():
 
 @app.route('/result',methods=['GET','POST'])
 def result():
+    # render_template('loading.html') needs to happen here
    if request.method == 'POST':
       result = request.form
       
