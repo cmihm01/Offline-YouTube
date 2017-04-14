@@ -41,24 +41,36 @@ def youtube_search(cat,diff,age,keyw):
         maxResults=5
       ).execute()
 
-    videos = []
-    videothumbs = []
+    scored_results = score_and_sort(search_response, keyw)
+    # return download_vids(scored_results) 
+    return render_template("select.html", videos=scored_results)
+
+
+def score_and_sort(search_response, keyw):
+    scored_vids = []
+    scored_results = []
+    # videothumbs = []
+    max_viewcount = 0
 
   # Add each result to the appropriate list, and then display the lists of
       # matching videos, channels, and playlists.
-    count = 1;
     for search_result in search_response.get("items", []):
         if search_result["id"]["kind"] == "youtube#video":
-            #videosthumbs.append(search_result["snippet"]["thumbnails"]["default"]["url"])
-            videos.append(search_result)
-            #videos.append("%s (%s)" % (search_result["snippet"]["thumbnails"]["default"]["url"],
-                              #   search_result["id"]["videoId"]))
-            #"%s (%s)" % (search_result["snippet"]["title"]
+            pvideo = pafy.new(search_result["id"]["videoId"])
+            score = 0
+            if (pvideo.viewcount > max_viewcount):
+                max_viewcount = pvideo.viewcount
+            score = score + (pvideo.rating) + (pvideo.viewcount / max_viewcount)
+            if keyw in (search_result["snippet"]["description"]):
+               score = score + 1
+            scored_vids.append(tuple((score, search_result)))
+    scored_vids.sort(key = lambda tup: tup[0], reverse=True)
 
-    #print "Videothumbs:\n", "\n".join(videothumbs), "\n"
-   # print "Videos:\n", "\n".join(videos), "\n"
-    #vids_reorder()
-    return render_template("select.html",videos=videos)
+    for i in range(0, len(scored_vids)):
+        scored_results.append(scored_vids[i][1])
+
+    # I need to give a list of videos to the download vids function 
+    return scored_results
     #return download_vids(videos) 
     # need to be URLS
 
