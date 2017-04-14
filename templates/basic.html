@@ -3,18 +3,10 @@
   <head>
     <title>Teacher Menu</title>
     <meta charset="utf-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">// <![CDATA[
-        function loading(){
-            console.log("loading!")
-            $("#loading").show();
-            $("#content").hide();       
-        }
-// ]]></script>
-<link rel="stylesheet" type="text/css" href="static/style.css">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
   </head>
   <body>
-    <form action="http://localhost:5000/result" method="POST" id="content" >
+    <form action="http://localhost:5000/result" method="POST">
     <div id=category-d>
      <p> Category: </p>
       <input type="text" name="category" placeholder="Math, spelling, writing" required><br>
@@ -38,13 +30,8 @@
     </div>
     <br>
     <div>
-      <input type="submit" value="Submit" onclick="loading()">
+      <input type="submit" value="Submit">
     </div>
     </form>
-    <div id=loading>
-      <p>
-        CHILL A BIT WHILE YOUR VIDS LOAD
-      </p>
-    </div>
   </body>
 </html>

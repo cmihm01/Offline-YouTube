@@ -66,11 +66,8 @@ def youtube_search(cat,diff,age,keyw):
 def download_vids():
     vidArray = []
     if request.method == 'POST':
-      result = request.form
-
-      for vid in videos:
-        if request.form[vid.id.videoId].checked:
-            vidArray.append(vid.id.videoId)
+        for vid in request.form.getlist("video"):
+            vidArray.append(vid)
     max_viewcount = 0
     scored_vids = []
 # https://stackoverflow.com/questions/273192/how-to-check-if-a-directory-exists-and-create-it-if-necessary

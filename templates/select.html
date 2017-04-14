@@ -1,12 +1,30 @@
 <!doctype html>
+  	<head>
+	    <title>Pick ya vids</title>
+	    <meta charset="utf-8">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	    <script type="text/javascript">
+	        function loading(){
+	            console.log("loading!")
+	            $("#loading").show();
+	            $("#content").hide();       
+	        }
+		</script>
+	    <link rel="stylesheet" type="text/css" href="static/style.css">
+	 </head>
 	<body>
-		<form action="http://localhost:5000/download">
+		<form action="http://localhost:5000/download" method='POST' id="content" >
 		{% for vid in videos %}
 			{{vid.snippet.title}}
 	       <img src = {{vid.snippet.thumbnails.default.url}}> 
-	       <input type=checkbox name= {{vid.id.videoId}}>
+	       <input type=checkbox name = "video" value={{vid.id.videoId}}>
 	       <br>
 	    {% endfor %}
-	    <input type=submit value = Submit>
+	    <input type=submit value = Submit onclick="loading()">
 	    </form>
+    	<div id=loading>
+	      	<p>
+	        	CHILL A BIT WHILE YOUR VIDS LOAD
+	      	</p>
+		</div>
 	</body>
