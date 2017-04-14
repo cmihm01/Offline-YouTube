@@ -1,0 +1,12 @@
+<!doctype html>
+	<body>
+		<form action="http://localhost:5000/download">
+		{% for vid in videos %}
+			{{vid.snippet.title}}
+	       <img src = {{vid.snippet.thumbnails.default.url}}> 
+	       <input type=checkbox name= {{vid.id.videoId}}>
+	       <br>
+	    {% endfor %}
+	    <input type=submit value = Submit>
+	    </form>
+	</body>

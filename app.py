@@ -46,18 +46,31 @@ def youtube_search(cat,diff,age,keyw):
 
   # Add each result to the appropriate list, and then display the lists of
       # matching videos, channels, and playlists.
+    count = 1;
     for search_result in search_response.get("items", []):
         if search_result["id"]["kind"] == "youtube#video":
-            videos.append(search_result["id"]["videoId"])
-            videothumbs.append(search_result["snippet"]["thumbnails"]["default"]["url"])
+            #videosthumbs.append(search_result["snippet"]["thumbnails"]["default"]["url"])
+            videos.append(search_result)
+            #videos.append("%s (%s)" % (search_result["snippet"]["thumbnails"]["default"]["url"],
+                              #   search_result["id"]["videoId"]))
             #"%s (%s)" % (search_result["snippet"]["title"]
 
-        print "Videothumbs:\n", "\n".join(videothumbs), "\n"
-    print "Videos:\n", "\n".join(videos), "\n"
-    return download_vids(videos) 
+    #print "Videothumbs:\n", "\n".join(videothumbs), "\n"
+   # print "Videos:\n", "\n".join(videos), "\n"
+    #vids_reorder()
+    return render_template("select.html",videos=videos)
+    #return download_vids(videos) 
     # need to be URLS
 
-def download_vids(vidArray):
+@app.route("/download",methods=['GET','POST'])
+def download_vids():
+    vidArray = []
+    if request.method == 'POST':
+      result = request.form
+
+      for vid in videos:
+        if request.form[vid.id.videoId].checked:
+            vidArray.append(vid.id.videoId)
     max_viewcount = 0
     scored_vids = []
 # https://stackoverflow.com/questions/273192/how-to-check-if-a-directory-exists-and-create-it-if-necessary
