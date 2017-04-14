@@ -41,11 +41,11 @@ def youtube_search(cat,diff,age,keyw):
         maxResults=5
       ).execute()
 
-    scored_results = score_and_sort(search_response)
+    scored_results = score_and_sort(search_response, keyw)
     render_template("select.html", videos=scored_results)
 
 
-def score_and_sort(search_response)
+def score_and_sort(search_response, keyw):
     scored_vids = []
     scored_results = []
     # videothumbs = []
@@ -60,6 +60,9 @@ def score_and_sort(search_response)
             if (pvideo.viewcount > max_viewcount):
                 max_viewcount = pvideo.viewcount
             score = score + (pvideo.rating) + (pvideo.viewcount / max_viewcount)
+            print search_result["snippet"]["description"]
+            if keyw in (search_result["snippet"]["description"]):
+               score = score + 1
             scored_vids.append(tuple((score, search_result)))
     scored_vids.sort(key = lambda tup: tup[0], reverse=True)
 
