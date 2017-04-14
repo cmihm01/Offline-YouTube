@@ -41,6 +41,11 @@ def youtube_search(cat,diff,age,keyw):
         maxResults=5
       ).execute()
 
+    scored_results = score_and_sort(search_response)
+    render_template("select.html", videos=scored_results)
+
+
+def score_and_sort(search_response)
     scored_vids = []
     scored_results = []
     # videothumbs = []
@@ -56,19 +61,18 @@ def youtube_search(cat,diff,age,keyw):
                 max_viewcount = pvideo.viewcount
             score = score + (pvideo.rating) + (pvideo.viewcount / max_viewcount)
             scored_vids.append(tuple((score, search_result)))
-
     scored_vids.sort(key = lambda tup: tup[0], reverse=True)
 
-            # videothumbs.append(search_result["snippet"]["thumbnails"]["default"]["url"])
-            #"%s (%s)" % (search_result["snippet"]["title"]
-    # print "Videothumbs:\n", "\n".join(videothumbs), "\n"
-    # print "Videos:\n", "\n".join(videos), "\n"
     for i in range(0, len(scored_vids)):
         scored_results.append(scored_vids[i][1])
 
+    # videothumbs.append(search_result["snippet"]["thumbnails"]["default"]["url"])
+     #"%s (%s)" % (search_result["snippet"]["title"]
+    # print "Videothumbs:\n", "\n".join(videothumbs), "\n"
+    # print "Videos:\n", "\n".join(videos), "\n"
     
     # I need to give a list of videos to the download vids function 
-    return download_vids(scored_result)
+    return scored_results
     # need to be URLS
 
 def download_vids(vidArray):
@@ -81,14 +85,10 @@ def download_vids(vidArray):
         #url = "https://www.youtube.com/watch?v=" + x
         video = pafy.new(x)
         ##owen's shit
-        score = 0
-        if (video.viewcount > max_viewcount):
-            max_viewcount = video.viewcount
-        score = score + (math.sqrt(video.rating)) + (video.viewcount / max_viewcount) ##+ count
+        
         best = video.getbest(preftype="mp4")
-        scored_vids.append(tuple((score, best)))
-    scored_vids.sort(key = lambda tup: tup[0], reverse=True)
-    for i in range(0, len(scored_vids)):
+        bests.append(best)
+    for i in range(0, len(bests)):
         global count
         count += 1
         filename = scored_vids[i][1].download("static/vids/" + str(count) + ".mp4")
