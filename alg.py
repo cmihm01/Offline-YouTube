@@ -65,6 +65,8 @@ def youtube_search(cat,diff,age,keyw):
     # print "Videos:\n", "\n".join(videos), "\n"
     for i in range(0, len(scored_vids)):
         scored_results.append(scored_vids[i][1])
+
+    
     # I need to give a list of videos to the download vids function 
     return download_vids(scored_result)
     # need to be URLS
