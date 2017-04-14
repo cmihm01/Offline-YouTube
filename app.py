@@ -26,7 +26,6 @@ def load():
 
 @app.route('/result',methods=['GET','POST'])
 def result():
-    # render_template('loading.html') needs to happen here
    if request.method == 'POST':
       result = request.form
       
@@ -85,10 +84,12 @@ def download_vids(vidArray):
         # filename = s.download("static/vids/" + str(count) + ".mp4")    
     return redirect(url_for('done'))
 
+app.jinja_env.globals.update(download_vids=download_vids)
+
 @app.route('/done')
 def done():
     zipdir('static/vids')
-    return app.send_static_file('content.zip')
+    return render_template('done.html')
 
 # https://stackoverflow.com/questions/1855095/how-to-create-a-zip-archive-of-a-directory/
 def zipdir(path):

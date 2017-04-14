@@ -1,6 +1,12 @@
-div{
+div {
 	text-align:center;
 }
-p{
+p,a {
 	font-size: 30px;
+}
+div#loading {
+    width: 100px;
+    margin:0 auto;
+    height: 100px;
+    display: none;
 }
