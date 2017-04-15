@@ -16,7 +16,7 @@
 		<form action="http://localhost:5000/download" method='POST' id="content" >
 		{% for vid in videos %}
 			{{vid.snippet.title}}
-	       <img src = {{vid.snippet.thumbnails.default.url}}> 
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/{{vid.id.videoId}}" frameborder="0" allowfullscreen></iframe>
 	       <input type=checkbox name = "video" value={{vid.id.videoId}}>
 	       <br>
 	    {% endfor %}
