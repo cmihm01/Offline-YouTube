@@ -82,9 +82,13 @@ def download_vids():
             vidArray.append(vid)
     max_viewcount = 0
     scored_vids = []
-# https://stackoverflow.com/questions/273192/how-to-check-if-a-directory-exists-and-create-it-if-necessary
-    if not os.path.exists("static/vids/"):
-        os.makedirs("static/vids/")
+    if os.path.exists("content/"):
+        shutil.rmtree('content/')
+    os.makedirs("content/.vids/")
+    target = open('content/VidPlayer.html', 'a')
+    target.write("<!DOCTYPE html>\n<html>\n<body>\n\n")
+
+
     for x in vidArray:
         #url = "https://www.youtube.com/watch?v=" + x
         video = pafy.new(x)
@@ -93,24 +97,21 @@ def download_vids():
         if (video.viewcount > max_viewcount):
             max_viewcount = video.viewcount
         score = score + (math.sqrt(video.rating)) + (video.viewcount / max_viewcount) ##+ count
-        best = video.getbest(preftype="mp4")
-        scored_vids.append(tuple((score, best)))
+        scored_vids.append(tuple((score, video)))
     scored_vids.sort(key = lambda tup: tup[0], reverse=True)
-    for i in range(0, len(scored_vids)):
-        global count
-        count += 1
-        filename = scored_vids[i][1].download("static/vids/" + str(count) + ".mp4")
 
-        # global count
-        # count += 1
-        # filename = s.download("static/vids/" + str(count) + ".mp4")    
+    for vid in scored_vids:
+        target.write('<video width="70%" controls>\n<source src=".vids/' + vid[1].title + '.mp4" type="video/mp4">\nYour browser does not support HTML5 video.\n</video>\n\n')
+        best = vid[1].getbest(preftype="mp4")
+        filename = best.download("content/.vids/" + vid[1].title + ".mp4")
+    target.write("</body>\n</html>")
+    target.close()
+       
     return redirect(url_for('done'))
-
-app.jinja_env.globals.update(download_vids=download_vids)
 
 @app.route('/done')
 def done():
-    zipdir('static/vids')
+    zipdir('content/')
     return render_template('done.html')
 
 # https://stackoverflow.com/questions/1855095/how-to-create-a-zip-archive-of-a-directory/
@@ -119,8 +120,8 @@ def zipdir(path):
     for root, dirs, files in os.walk(path):
         for file in files:
             zf.write(os.path.join(root, file))
-    shutil.rmtree('static/vids')
-
+    if os.path.exists("content/"):
+        shutil.rmtree('content/')
 
 
 if __name__ == '__main__':
