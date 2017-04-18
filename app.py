@@ -101,6 +101,7 @@ def download_vids():
     scored_vids.sort(key = lambda tup: tup[0], reverse=True)
 
     for vid in scored_vids:
+        target.write('<h2>' + vid[1].title + '</h2>')
         target.write('<video width="70%" controls>\n<source src=".vids/' + vid[1].title + '.mp4" type="video/mp4">\nYour browser does not support HTML5 video.\n</video>\n\n')
         best = vid[1].getbest(preftype="mp4")
         filename = best.download("content/.vids/" + vid[1].title + ".mp4")
