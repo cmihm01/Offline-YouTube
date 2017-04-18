@@ -29,16 +29,16 @@ def result():
    if request.method == 'POST':
       result = request.form
       
-      return youtube_search(request.form['category'],request.form['difficulty'], request.form['age'],request.form['keywords'] )
+      return youtube_search(request.form['category'],request.form['difficulty'], request.form['age'],request.form['keywords'],request.form['num-vids'] )
       #return render_template("result.html",result = result)
 
-def youtube_search(cat,diff,age,keyw):
+def youtube_search(cat,diff,age,keyw,num):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
 
     search_response = youtube.search().list(
         q=cat + keyw,
         part="id,snippet",
-        maxResults=5
+        maxResults=num
       ).execute()
 
     scored_results = score_and_sort(search_response, keyw)
