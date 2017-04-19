@@ -8,8 +8,8 @@
   <body>
     <form action="http://localhost:5000/result" method="POST">
     <div id=category-d>
-     <p> Category: </p>
-      <input type="text" name="category" placeholder="Math, spelling, writing" required><br>
+     <p> Subject: </p>
+      <input type="text" name="category" placeholder="Math" required><br>
     </div>
     <div id=difficulty-d>
      <p> Difficulty: </p>
@@ -25,14 +25,21 @@
       <input type="radio" name="age" value="Adult" required>Adult<br>
     </div>
     <div id=keyword-d>
-      <p>Keyword: </p>
-      <input type="text" name="keywords" placeholder="Algebra, U.S. History, Oil Painting">
+      <p>Keywords: </p>
+      <input type="text" name="keywords" placeholder="Algebra, Addition, Subtraction">
     </div>
     <br>
     <div id=num-vids-d>
-      <p> How many videos </p>
-       <input type="text" name="num-vids" placeholder="10">
+      <p> How many videos? </p>
+       <select name=num-vids>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+        </select>
        </div>
+       <br><br>
     <div>
       <input type="submit" value="Submit">
     </div>

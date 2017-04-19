@@ -15,10 +15,14 @@
 	<body>
 		<form action="http://localhost:5000/download" method='POST' id="content" >
 		{% for vid in videos %}
-			<h4>{{vid.snippet.title}}</h4><br><div>
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/{{vid.id.videoId}}" frameborder="0" allowfullscreen></iframe>
-	       <div>Want to Download?<input type=checkbox name = "video" value={{vid.id.videoId}}></div></div>
-	       <br><br>
+			<h4>{{vid.snippet.title}}</h4>
+			<div>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{vid.id.videoId}}" frameborder="0" allowfullscreen></iframe>
+				<br>
+				<div id=descript> {{vid.snippet.description}}</div>
+				<br>
+		      	Want to Download? <input type=checkbox name = "video" value={{vid.id.videoId}}>
+		    </div>
 	    {% endfor %}
 	    <input type=submit value = Download onclick="loading()">
 	    </form>

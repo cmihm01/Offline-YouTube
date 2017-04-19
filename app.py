@@ -40,10 +40,34 @@ def youtube_search(cat,diff,age,keyw,num):
         part="id,snippet",
         maxResults=num
       ).execute()
+    search_videos = []
+
+    for search_result in search_response.get("items", []):
+        search_videos.append(search_result["id"]["videoId"])
+    video_ids = ",".join(search_videos)
+
+    video_response = youtube.videos().list(
+        id=video_ids,
+        part='snippet, recordingDetails'
+    ).execute()
+
+    descriptions = []
+
+    # Add each result to the list, and then display the list of matching videos.
+    for video_result in video_response.get("items", []):
+        descriptions.append((video_result["snippet"]["description"]))
+        print "Videos:\n", "\n".join(descriptions), "\n"
+
+    count = 0
+    for vid in search_response.get("items", []):
+        vid["snippet"]["description"] = descriptions[count]
+        count+=1
 
     scored_results = score_and_sort(search_response, keyw)
+
+
     # return download_vids(scored_results) 
-    return render_template("select.html", videos=scored_results)
+    return render_template("select.html", videos=scored_results,descriptions=descriptions)
 
 
 def score_and_sort(search_response, keyw):
