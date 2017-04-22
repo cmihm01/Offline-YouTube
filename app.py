@@ -126,19 +126,14 @@ def download_vids():
         #url = "https://www.youtube.com/watch?v=" + x
         video = pafy.new(x)
         ##owen's shit
-        score = 0
-        if (video.viewcount > max_viewcount):
-            max_viewcount = video.viewcount
-        score = score + (math.sqrt(video.rating)) + (video.viewcount / max_viewcount) ##+ count
-        scored_vids.append(tuple((score, video)))
-    scored_vids.sort(key = lambda tup: tup[0], reverse=True)
+        scored_vids.append(video)
 
     for vid in scored_vids:
-        target.write('<h2>' + vid[1].title + '</h2>')
-        target.write('<video width="70%" controls>\n<source src=".vids/' + vid[1].title + 
+        target.write('<h2>' + vid.title + '</h2>')
+        target.write('<video width="70%" controls>\n<source src=".vids/' + vid.title + 
             '.mp4" type="video/mp4">\nYour browser does not support HTML5 video.\n</video>\n\n')
-        best = vid[1].getbest(preftype="mp4")
-        filename = best.download("content/.vids/" + vid[1].title + ".mp4")
+        best = vid.getbest(preftype="mp4")
+        filename = best.download("content/.vids/" + vid.title + ".mp4")
     target.write("</body>\n</html>")
     target.close()
        
