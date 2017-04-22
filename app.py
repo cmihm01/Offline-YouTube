@@ -29,16 +29,19 @@ def result():
    if request.method == 'POST':
       result = request.form
       
-      return youtube_search(request.form['category'],request.form['difficulty'], request.form['age'],request.form['keywords'],request.form['num-vids'] )
+      return youtube_search(request.form['category'],request.form['difficulty'], request.form['age'],
+        request.form['keywords'],request.form['num-vids'],request.form['length'] )
       #return render_template("result.html",result = result)
 
-def youtube_search(cat,diff,age,keyw,num):
+def youtube_search(cat,diff,age,keyw,num,length):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
-
+    
     search_response = youtube.search().list(
+        type='video',
         q=cat + keyw,
         part="id,snippet",
-        maxResults=num
+        maxResults=num,
+        videoDuration=length
       ).execute()
     search_videos = []
 
@@ -52,6 +55,7 @@ def youtube_search(cat,diff,age,keyw,num):
     ).execute()
 
     descriptions = []
+
 
     # Add each result to the list, and then display the list of matching videos.
     for video_result in video_response.get("items", []):
