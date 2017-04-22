@@ -13,6 +13,7 @@ from oauth2client.tools import argparser
 app = Flask(__name__)
 
 count = 0
+downloaded_IDs = []
 
 DEVELOPER_KEY = "AIzaSyAt2kWulfcDsdid2AQ2iXh7_aRcNj8ay9g"
 YOUTUBE_API_SERVICE_NAME = "youtube"
@@ -60,7 +61,7 @@ def youtube_search(cat,age,keyw,num,length):
     # Add each result to the list, and then display the list of matching videos.
     for video_result in video_response.get("items", []):
         descriptions.append((video_result["snippet"]["description"]))
-        print "Videos:\n", "\n".join(descriptions), "\n"
+        #print "Videos:\n", "\n".join(descriptions), "\n"
 
     count = 0
     for vid in search_response.get("items", []):
@@ -91,6 +92,9 @@ def score_and_sort(search_response, keyw):
             score = score + (pvideo.rating) + (pvideo.viewcount / max_viewcount)
             if keyw in (search_result["snippet"]["description"]):
                score = score + 1
+            if len(downloaded_IDs) > 0:
+                if search_result["id"]["videoId"] in downloaded_IDs:
+                    score += 10
             scored_vids.append(tuple((score, search_result)))
     scored_vids.sort(key = lambda tup: tup[0], reverse=True)
 
@@ -108,6 +112,7 @@ def download_vids():
     if request.method == 'POST':
         for vid in request.form.getlist("video"):
             vidArray.append(vid)
+            downloaded_IDs.append(vid)
     max_viewcount = 0
     scored_vids = []
     if os.path.exists("content/"):
