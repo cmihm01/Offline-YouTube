@@ -9,6 +9,9 @@
 	            $("#loading").show();
 	            $("#content").hide();       
 	        }
+	        function show_descript(){
+	        	 document.getElementById("Description").style.display = "block";
+	        }
 		</script>
 	    <link rel="stylesheet" type="text/css" href="static/style.css">
 	 </head>
@@ -19,7 +22,8 @@
 			<div>
 				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{vid.id.videoId}}" frameborder="0" allowfullscreen></iframe>
 				<br>
-				<div id=descript> {{vid.snippet.description}}</div>
+				<div id=descript>{{vid.snippet.description}}</div>
+
 				<br>
 		      	Want to Download? <input type=checkbox name = "video" value={{vid.id.videoId}}>
 		    </div>

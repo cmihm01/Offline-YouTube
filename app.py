@@ -29,11 +29,11 @@ def result():
    if request.method == 'POST':
       result = request.form
       
-      return youtube_search(request.form['category'],request.form['difficulty'], request.form['age'],
-        request.form['keywords'],request.form['num-vids'],request.form['length'] )
+      return youtube_search(request.form['category'], request.form['age'],
+        request.form['keywords'],request.form['num-vids'],request.form['length'])
       #return render_template("result.html",result = result)
 
-def youtube_search(cat,diff,age,keyw,num,length):
+def youtube_search(cat,age,keyw,num,length):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
     
     search_response = youtube.search().list(
@@ -130,7 +130,8 @@ def download_vids():
 
     for vid in scored_vids:
         target.write('<h2>' + vid[1].title + '</h2>')
-        target.write('<video width="70%" controls>\n<source src=".vids/' + vid[1].title + '.mp4" type="video/mp4">\nYour browser does not support HTML5 video.\n</video>\n\n')
+        target.write('<video width="70%" controls>\n<source src=".vids/' + vid[1].title + 
+            '.mp4" type="video/mp4">\nYour browser does not support HTML5 video.\n</video>\n\n')
         best = vid[1].getbest(preftype="mp4")
         filename = best.download("content/.vids/" + vid[1].title + ".mp4")
     target.write("</body>\n</html>")
