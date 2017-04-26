@@ -1,3 +1,7 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
 div {
 	text-align:center;
 }
@@ -23,4 +27,29 @@ div#submit{
 }
 input[type=submit]{
     width: 150px;  height: 15px;
+}
+
+.downloadLink {
+	padding-top: 100px;
+}
+
+.allInstructions {
+	width: 900px;
+	height: 100%;
+	margin: 0 auto
+}
+
+div .indivInstruction {
+	float: left;
+	width: 200px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.instructionBody {
+	padding-top: 150px;
+}
+
+.instruction {
+	font-size: 14px;
 }
