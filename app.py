@@ -129,8 +129,8 @@ def download_vids():
         scored_vids.append(video)
 
     for vid in scored_vids:
-        target.write('<h2>' + vid.title + '</h2>')
-        target.write('<video width="70%" controls>\n<source src=".vids/' + vid.title + 
+        target.write('<h2>' + vid.title.encode('utf8') + '</h2>')
+        target.write('<video width="70%" controls>\n<source src=".vids/' + vid.title.encode('utf8') + 
             '.mp4" type="video/mp4">\nYour browser does not support HTML5 video.\n</video>\n\n')
         best = vid.getbest(preftype="mp4")
         filename = best.download("content/.vids/" + vid.title + ".mp4")
