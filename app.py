@@ -31,10 +31,10 @@ def result():
       result = request.form
       
       return youtube_search(request.form['category'], request.form['age'],
-        request.form['keywords'],request.form['num-vids'],request.form['length'])
+        request.form['keywords'],request.form['num-vids'],request.form['length'],request.form['quality'])
       #return render_template("result.html",result = result)
 
-def youtube_search(cat,age,keyw,num,length):
+def youtube_search(cat,age,keyw,num,length,quality):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
     search_response = youtube.search().list(
         type='video',
@@ -69,9 +69,10 @@ def youtube_search(cat,age,keyw,num,length):
 
     scored_results = score_and_sort(search_response, keyw)
 
+    query = [cat,age,keyw,num,length,quality]
 
     # return download_vids(scored_results) 
-    return render_template("select.html", videos=scored_results,descriptions=descriptions)
+    return render_template("select.html", videos=scored_results,descriptions=descriptions,query=query)
 
 
 def score_and_sort(search_response, keyw):
