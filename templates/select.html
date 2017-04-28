@@ -17,9 +17,9 @@
 	 </head>
 	<body>
 
-		<FORM><INPUT id="back" Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
+		<FORM><INPUT id="back" Type="button" VALUE="Edit" onClick="history.go(-1);return true;"></FORM>
 		<h2> Select Which Videos to Download </h2>
-		<form action="http://localhost:5000/download?quality="{{query[5}} method='POST' id="content" >
+		<form action="http://localhost:5000/download?quality="{{query[5]}} method='POST' id="content" >
 			    <div id=submit> <input id=download type=submit value = Download! onclick="loading()" style = "font-size:50px"></div>
 		{% for vid in videos %}
 		<div id=check><input type=checkbox name = "video" value={{vid.id.videoId}}></div>
@@ -38,8 +38,13 @@
 
 	    </form>
 	    <div id="query">
-	    	<h6> Your Query </h6>
-	    	<p> Subject: {{query[0]}}
+	    	<h4> Your Query </h4>
+	    	<p> Subject: {{query[0]}} <p>
+	    	<p> Age: {{query[1]}} <p>
+	    	<p> Keywords: {{query[2]}} <p>
+	    	<p> Number of Videos: {{query[3]}} <p>
+	    	<p> Length: {{query[4]}} <p>
+	    	<p> Quality: {{query[5]}} <p>
     	<div id=loading>
 	      	<p>
 	        	CHILL A BIT WHILE YOUR VIDS LOAD

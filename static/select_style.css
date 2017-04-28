@@ -7,7 +7,7 @@ div {
 	text-align:center;
 }
 p,a {
-	font-size: 30px;
+	font-size: 20px;
 }
 div#loading {
     width: 100px;
@@ -71,8 +71,8 @@ div#vidframe{
 }
 #back{
 	position:fixed;
-	top: 20px; 
-	left:50px;
+	top: 400px; 
+	right:65px;
 	width:120px;
 	height:20px;
 }
@@ -85,7 +85,14 @@ div#check{
 }
 
 input[type='checkbox'] {
-    width:30px;
-    height:30px;
+    transform: scale(2);
+    margin-left:50px;
+
+}
+div#query{
+	position:fixed;
+	top: 20px; 
+	right:40px;
+	font-size: 20px;
 
 }
