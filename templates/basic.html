@@ -4,13 +4,21 @@
     <title>Teacher Menu</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="static/style.css">
+
+    <script> 
+    	function showDiv() {
+   			document.getElementById('col1').style.display = "block";
+		}
+	</script>
   </head>
   <body>
     <div id=cont2>
 	    <div id=cont1>
 
-	    	<div id=col1>
+	    	<div id=col1 style="display:none">
 	    		<div id=subj>
+	    		<h1> Help </h1>
+	    		<br> <br>
 					<p style="text-align:left">Example Subjects:</p>
 					<ul id=ex_sub>
 						<li> Math </li>
@@ -37,9 +45,13 @@
 			</div>
 
 		    <div id=col2>
+		    <h1> Download Videos for Your Classroom </h1>
+		    <br>
+		    <button onclick="showDiv()"> Need Help? </button>
+		    	
 		    	<form action="http://localhost:5000/result" method="POST">
 			    <div id=category-d>
-			     <p> What subject are you teaching?: </p>
+			     <p> What subject are you teaching? </p>
 			     <input type="text" name="category" placeholder="Math" required><br>
 			    </div>
 

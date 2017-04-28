@@ -2,7 +2,7 @@ html, body {
     margin: 0;
     height: 100%;
 }
-div {
+div#col2 {
 	text-align:center;
 }
 p,a {
@@ -36,7 +36,7 @@ div#send{
 	width: 50%;
 }
 
-.downloadLink {
+.downloadLin {
 	padding-top: 100px;
 }
 
@@ -62,7 +62,7 @@ div .indivInstruction {
 }
 div#help{
 	float:left;
-	margin-left:50px;
+	
 }
 div#age{
 	margin:auto;
@@ -75,17 +75,19 @@ div#age{
 	float:left;
 	width:100%;
 	overflow:hidden;
-	background:#ffa7a7; /* column 2 background colour */
+
 }
 #cont1 {
 	float:left;
 	width:100%;
 	position:relative;
 	right:50%;
-	background:#fff689; /* column 1 background colour */
+
 }
 #col1 {
+	border-style:solid;
 	float:left;
+	text-align:left;
 	width:46%;
 	position:relative;
 	left:52%;
@@ -97,4 +99,5 @@ div#age{
 	position:relative;
 	left:56%;
 	overflow:hidden;
+
 }
