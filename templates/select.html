@@ -13,24 +13,31 @@
 	        	 document.getElementById("Description").style.display = "block";
 	        }
 		</script>
-	    <link rel="stylesheet" type="text/css" href="static/style.css">
+	    <link rel="stylesheet" type="text/css" href="static/select_style.css">
 	 </head>
 	<body>
+
+		<FORM><INPUT id="back" Type="button" VALUE="Back" onClick="history.go(-1);return true;"></FORM>
+		<h2> Select Which Videos to Download </h2>
 		<form action="http://localhost:5000/download" method='POST' id="content" >
+			    <div id=submit> <input id=download type=submit value = Download! onclick="loading()" style = "font-size:50px"></div>
 		{% for vid in videos %}
+		<div id=check><input type=checkbox name = "video" value={{vid.id.videoId}}></div>
+		<div id = vidframe>
 			<h4>{{vid.snippet.title}}</h4>
-			<div>
+	
 				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{vid.id.videoId}}" frameborder="0" allowfullscreen></iframe>
 				<br>
 				<div id=descript>{{vid.snippet.description}}</div>
 
 				<br>
-		      	Want to Download? <input type=checkbox name = "video" value={{vid.id.videoId}}>
+		      	
 		    </div>
 	    {% endfor %}
 	    <br>
-	    <div id=submit> <input type=submit value = Download onclick="loading()"></div>
+
 	    </form>
+	  
     	<div id=loading>
 	      	<p>
 	        	CHILL A BIT WHILE YOUR VIDS LOAD

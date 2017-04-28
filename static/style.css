@@ -14,7 +14,7 @@ div#loading {
     height: 100px;
     display: none;
 }
-h4{
+h2,h4{
 	text-align:center;
 }
 div#descript {
@@ -24,9 +24,16 @@ div#descript {
 }
 div#submit{
 	text-align: center;
+	float:center;
 }
-input[type=submit]{
-    width: 150px;  height: 15px;
+div#send{
+    
+    text-align: center;
+    margin:0 auto;
+    float:center;
+}
+#send{
+	width: 50%;
 }
 
 .downloadLink {
@@ -52,4 +59,42 @@ div .indivInstruction {
 
 .instruction {
 	font-size: 14px;
+}
+div#help{
+	float:left;
+	margin-left:50px;
+}
+div#age{
+	margin:auto;
+}
+
+/*http://matthewjamestaylor.com/blog/equal-height-columns-2-column.htm*/
+/* Start of Column CSS */
+#cont2 {
+	clear:left;
+	float:left;
+	width:100%;
+	overflow:hidden;
+	background:#ffa7a7; /* column 2 background colour */
+}
+#cont1 {
+	float:left;
+	width:100%;
+	position:relative;
+	right:50%;
+	background:#fff689; /* column 1 background colour */
+}
+#col1 {
+	float:left;
+	width:46%;
+	position:relative;
+	left:52%;
+	overflow:hidden;
+}
+#col2 {
+	float:left;
+	width:46%;
+	position:relative;
+	left:56%;
+	overflow:hidden;
 }

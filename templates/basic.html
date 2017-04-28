@@ -6,54 +6,99 @@
     <link rel="stylesheet" type="text/css" href="static/style.css">
   </head>
   <body>
-    <form action="http://localhost:5000/result" method="POST">
-    <div id=category-d>
-     <p> Subject: </p>
-      <input type="text" name="category" placeholder="Math" required><br>
-    </div>
+    <div id=cont2>
+	    <div id=cont1>
 
-    <div id=age-d>
-      <p>Age: </p>
-      <input type="radio" name="age" value="Preschool" required>Preschool<br>
-      <input type="radio" name="age" value="Elementary" required>Elementary<br>
-      <input type="radio" name="age" value="Adolescent" required>Adolescent<br>
-      <input type="radio" name="age" value="Adult" required>Adult<br>
-    </div>
+	    	<div id=col1>
+	    		<div id=subj>
+					<p style="text-align:left">Example Subjects:</p>
+					<ul id=ex_sub>
+						<li> Math </li>
+						<li> English </li>
+						<li> Geography </li>
+					</ul>
+				</div>
+				
+				<div id=age>
+					<p style="text-align:left">Age:</p>
+					<ul>
+					<li> Select the age of your students, or what you want the target age of the videos to be</li>
+					</ul>
+				</div>
 
-    <div id=keyword-d>
-      <p>Keywords: </p>
-      <input type="text" name="keywords" placeholder="Algebra, Addition, Subtraction">
-    </div>
-    <br>
-    <div id=num-vids-d>
-      <p> How many videos? </p>
-      <select name=num-vids>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-        <option value="25">25</option>
-      </select>
-    </div>
-    <br>
-    <div id=length-d>
-      <p> How long? </p>
-      <select name=length>
-        <option value="any">Any</option>
-        <option value="short">Less than 4 Mins</option>
-        <option value="medium">4-20 Mins</option>
-        <option value="long">20+ Mins</option>
-      </select>
-    </div>
-    <div id=qual-d>
-      <p>Quality: </p>
-      <input type="radio" name="quality" value="Low" required>Low<br>
-      <input type="radio" name="quality" value="High" required>High<br>
-    </div>
-    <br><br>
-    <div>
-      <input type="submit" value="Submit">
-    </div>
-    </form>
+				<div id=keywords>
+					<p style="text-align:left">Example Keywords:</p>
+					<ul>
+						<li> Math: Addition, Geometry, Calculus </li>
+						<li> English: Spelling, Grammar, Syntax </li>
+						<li> Geography: World, U.S., European </li>
+					</ul>
+				</div>
+			</div>
+
+		    <div id=col2>
+		    	<form action="http://localhost:5000/result" method="POST">
+			    <div id=category-d>
+			     <p> What subject are you teaching?: </p>
+			     <input type="text" name="category" placeholder="Math" required><br>
+			    </div>
+
+			    <br>
+			    <div id=age-d>
+
+			    	<div id = age>
+				      <p> Age: </p>
+				      <input type="radio" name="age" value="Preschool" required>Preschool<br>
+				      <input type="radio" name="age" value="Elementary" required>Elementary<br>
+				      <input type="radio" name="age" value="Adolescent" required>Adolescent<br>
+				      <input type="radio" name="age" value="Adult" required>Adult<br>
+				    </div>
+
+			    </div>
+
+			    <div id=keyword-d>
+			      <p>Keywords: </p>
+			      <input type="text" name="keywords" placeholder="Algebra, Addition, Subtraction">
+			    </div>
+
+			    <br>
+			    <div id=num-vids-d>
+			      <p> How many videos? </p>
+			      <select name=num-vids>
+			        <option value="5">5</option>
+			        <option value="10">10</option>
+			        <option value="15">15</option>
+			        <option value="20">20</option>
+			        <option value="25">25</option>
+			      </select>
+			    </div>
+
+			    <br>
+			    <div id=length-d>
+			      <p> How long for each video? </p>
+				  <input type=radio name = "length" value=short> Less than 4 mins
+				  <input type=radio name = "length" value=medium checked> 4-20 mins
+				  <input type=radio name = "length" value=long> Longer than 20 mins
+			    </div>
+
+			    <div id=qual-d>
+			      <p>Quality of video: </p>
+			      <input type="radio" name="quality" value="Low" required checked>Low<br>
+			      <input type="radio" name="quality" value="High" required>High<br>
+			    </div>
+			    <br>
+			  	<div id=send> <input type="submit" value="Submit"> </div>
+			  	<br><br>
+			</form>
+		
+			</div>
+		
+			
+		</div>
+		
+	</div>
+
+
+     
   </body>
 </html>
