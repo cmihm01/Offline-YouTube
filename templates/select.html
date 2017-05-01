@@ -7,7 +7,11 @@
 	        function loading(){
 	            console.log("loading!")
 	            $("#loading").show();
-	            $("#content").hide();       
+	            $("#content").hide();  
+	            $("#query").hide();
+	            $("#title").hide(); 
+	            $("#back").hide();    
+
 	        }
 	        function show_descript(){
 	        	 document.getElementById("Description").style.display = "block";
@@ -18,7 +22,7 @@
 	<body>
 
 		<FORM><INPUT id="back" Type="button" VALUE="Edit" onClick="history.go(-1);return true;"></FORM>
-		<h2> Select Which Videos to Download </h2>
+		<h2 id="title"> Select Which Videos to Download </h2>
 		<form action="http://localhost:5000/download?quality="{{query[5]}} method='POST' id="content" >
 			    <div id=submit> <input id=download type=submit value = Download! onclick="loading()" style = "font-size:50px"></div>
 		{% for vid in videos %}
@@ -39,12 +43,13 @@
 	    </form>
 	    <div id="query">
 	    	<h4> Your Query </h4>
-	    	<p> Subject: {{query[0]}} <p>
-	    	<p> Age: {{query[1]}} <p>
-	    	<p> Keywords: {{query[2]}} <p>
-	    	<p> Number of Videos: {{query[3]}} <p>
-	    	<p> Length: {{query[4]}} <p>
-	    	<p> Quality: {{query[5]}} <p>
+	    	<p> Subject: {{query[0]}} </p>
+	    	<p> Age: {{query[1]}} </p>
+	    	<p> Keywords: {{query[2]}} </p>
+	    	<p> Number of Videos: {{query[3]}} </p>
+	    	<p> Length: {{query[4]}} </p>
+	    	<p> Quality: {{query[5]}} </p>
+	    </div>
     	<div id=loading>
 	      	<p>
 	        	CHILL A BIT WHILE YOUR VIDS LOAD
