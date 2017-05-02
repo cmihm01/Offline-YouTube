@@ -7,8 +7,13 @@
 
     <script> 
     	function showDiv() {
-   			document.getElementById('col1').style.display = "block";
+    		if (document.getElementById('col1').style.display == "none"){ 
+   				document.getElementById('col1').style.display = "block";
+   			}
+   			else
+   				document.getElementById('col1').style.display = "none";
 		}
+
 	</script>
   </head>
   <body>
